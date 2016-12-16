@@ -28,5 +28,5 @@ Tabellone elettronico per biliardino
 * [Pinout Arietta G25](http://pinout.acmesystems.it)
 * [Acme Arietta G25](http://www.acmesystems.it/arietta)
 * [Hardware per la realizzazione del tabellone](http://www.acmesystems.it/ledpanel)
-* [Datasheet del diodo IR trasmettitore)(http://www.mouser.com/ds/2/239/S_110_E5208A-336877.pdf)
+* [Datasheet del diodo IR trasmettitore](http://www.mouser.com/ds/2/239/S_110_E5208A-336877.pdf)
 * [Datasheet del ricevitore IR](http://www.mouser.com/ds/2/427/tsop321-531469.pdf)

@@ -48,10 +48,10 @@ Segnali su connettore flat 8+8 pin
 
 Altri segnali
 
-| Signal   | Arietta pin # |
-|-----------------|--------|
-| Spia verde spia | J4.26  |
-| IR_PULL         | J4.40  |
+| Signal     | Arietta pin # |
+|------------|---------------|
+| Spia verde | J4.26         |
+| IR_PULL    | J4.40         |
 
 ##Links
 

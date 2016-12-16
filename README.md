@@ -61,3 +61,5 @@ Altri segnali
 * [Hardware per la realizzazione del tabellone](http://www.acmesystems.it/ledpanel)
 * [Datasheet del diodo IR trasmettitore](http://www.mouser.com/ds/2/239/S_110_E5208A-336877.pdf)
 * [Datasheet del ricevitore IR](http://www.mouser.com/ds/2/427/tsop321-531469.pdf)
+
+Copyright (C) 2016 - Sergio Tanzilli - tanzilli@acmesystems.it

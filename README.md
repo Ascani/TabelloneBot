@@ -6,13 +6,13 @@ Tabellone elettronico per biliardino
 
 ##Sorgenti tabellone
 
-* [tabellone.py](Sorgente principale del programma che gira all'interno dei tabelloni)
+* [tabellone.py](tabellone.py) Sorgente principale del programma che gira all'interno dei tabelloni a led RGB
 
 ##Sorgenti biliardino
 
-* [biliardino.py](Sorgente principale del programma che gira all'interno del biliardino)
-* [acmepins.py](Modulo di gestione dei pin di Arietta G25)
-* [cronometro.py](Modulo per la misurazione del tempo di gioco trascorso)
+* [biliardino.py](biliardino.py) Sorgente principale del programma che gira all'interno del biliardino
+* [acmepins.py](acmepins.py) Modulo di gestione dei pin di Arietta G25
+* [cronometro.py](cronometro.py) Modulo per la misurazione del tempo di gioco trascorso
 
 ##Pacchetti da installare 
 

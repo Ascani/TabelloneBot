@@ -10,7 +10,7 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-__version__ = 'v0.0.3'
+__version__ = 'v0.0.4'
 
 import os.path
 import platform
@@ -756,6 +756,7 @@ def pinname2kernelid(pinname):
 class GPIO():
 	kernel_id=None
 	fd=None
+
 
 	def __init__(self,pin,mode):
 		self.kernel_id=pinname2kernelid(pin)

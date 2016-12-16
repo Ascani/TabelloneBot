@@ -1,8 +1,8 @@
 #TabelloneBot
 
-![Tabellone elettronico](tabellone.jpg)
-
 Tabellone elettronico per biliardino
+
+![Tabellone elettronico](tabellone.jpg)
 
 ##Sorgenti tabellone
 
@@ -21,6 +21,37 @@ Tabellone elettronico per biliardino
 	apt-get update
 	apt-get install python-pip
 	pip install python-telegram-bot
+
+##Connessioni da Arietta verso i sensori
+
+Segnali su connettore flat 8+8 pin
+
+| Pin # | Signal   | Arietta pin # |
+|-------|----------|---------------|
+| 1     | GND      | J4.9          |
+| 2     | LED_BLUE | J4.34         |
+| 3     | GND      | J4.9          |
+| 4     | GND      | J4.9          |
+| 5     | IR_BLUE  | J4.38         |
+| 6     | GND      | J4.9          |
+| 7     | 3V3      | J4.5          |
+| 8     | GND      | J4.9          |
+| 9     | LED_RED  | J4.34         |
+| 10    | GND      | J4.9          |
+| 11    | GND      | J4.9          |
+| 12    | IR_RED   | J4.26         |
+| 13    | GND      | J4.9          |
+| 14    | 3V3      | J4.5          |
+| 15    | N.C.     |               |
+| 16    | N.C.     |               |
+
+
+Altri segnali
+
+| Signal   | Arietta pin # |
+|-----------------|--------|
+| Spia verde spia | J4.26  |
+| IR_PULL         | J4.40  |
 
 ##Links
 

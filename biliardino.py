@@ -105,8 +105,7 @@ def game():
 				print "Goal for blue %d" % blue_score
 				telegram_bot.send_alert("Goal dei blu\nBlu %02d - Rossi %02d" % (blue_score,red_score))
 				if scores_check(blue_score,red_score,crono)=="blue":
-					telegram_bot.send_alert("Vittoria dei Blu !!")
-					telegram_bot.send_alert("Durata della partita: ", crono.get())
+					telegram_bot.send_alert("Vittoria dei Blue !!\nDurata della partita: %s\nRisultato: Blu %02d - Rossi %02d" % (crono.get(),blue_score,red_score))
 				blink(LED,2,0.2)
 				time.sleep(1)
 
@@ -117,8 +116,7 @@ def game():
 				print "Goal for red %d" % red_score
 				telegram_bot.send_alert("Goal dei rossi\nRossi %02d - Blu %02d" % (red_score,blue_score))
 				if scores_check(blue_score,red_score,crono)=="red":
-					telegram_bot.send_alert("Vittoria dei Rossi !!")
-					telegram_bot.send_alert("Durata della partita: ", crono.get())
+					telegram_bot.send_alert("Vittoria dei Rossi !!\nDurata della partita: %s\nRisultato: Rossi %02d - Blu %02d" % (crono.get(),red_score,blue_score))
 				blink(LED,3,0.2)
 				time.sleep(1)
 

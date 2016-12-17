@@ -10,6 +10,7 @@ import StringIO
 import sys
 import os
 from acmepins import GPIO
+from datetime import datetime
 
 class LedPanel():	
 	extra_small_font=None
@@ -119,5 +120,10 @@ class LedPanel():
 		draw.rectangle((0,0,31,31), outline=0, fill=0)
 		draw.text((0,0), "No", (5,0,0), font=self.small_font)
 		draw.text((0,10), "Link", (5,0,0), font=self.small_font)
+		draw.text((0,20), self.get_time(), (0,5,0), font=self.small_font)
 		del draw		
 		self.refresh()
+		
+	def get_time(self):
+		d = datetime.now()
+		return "{:%H:%M}".format(d)

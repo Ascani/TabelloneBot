@@ -14,6 +14,7 @@ Tabellone elettronico per biliardino
 * [acmepins.py](acmepins.py) Modulo di gestione dei pin di Arietta G25
 * [cronometro.py](cronometro.py) Modulo per la misurazione del tempo di gioco trascorso
 * [ledpanel.py](ledpanel.py) Modulo di gestione del pannello rgb
+* [bot.py](bot.py) Modulo semplificato per la gestione del bot Telegram
 
 ##Pacchetti da installare 
 
@@ -62,5 +63,6 @@ Altri segnali
 * [Hardware per la realizzazione del tabellone](http://www.acmesystems.it/ledpanel)
 * [Datasheet del diodo IR trasmettitore](http://www.mouser.com/ds/2/239/S_110_E5208A-336877.pdf)
 * [Datasheet del ricevitore IR](http://www.mouser.com/ds/2/427/tsop321-531469.pdf)
+* [Documentazione Python-Telegram-Bot](https://python-telegram-bot.readthedocs.io/en/latest/)
 
 Copyright (C) 2016 - Sergio Tanzilli - tanzilli@acmesystems.it

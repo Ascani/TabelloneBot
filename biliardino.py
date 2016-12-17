@@ -12,6 +12,10 @@ from acmepins import GPIO,PWM
 import time
 import thread
 import threading
+from bot import Bot
+
+#@TabelloneBot
+telegram_bot=Bot("312219948:AAGCh6-Z8HscyvpKu-SRCw5lbS2TRkTCoyE")
 
 # PWM a 38KHz per led IR
 led_ir_out = PWM("J4.34",38000)    
@@ -73,6 +77,7 @@ def game():
 					blue_score=0
 					red_score=0
 					last_score="none"
+					telegram_bot.send_alert("Inizio partita")
 					print "Reset"
 					break
 					
@@ -81,10 +86,14 @@ def game():
 				red_score-=1
 				last_score="none"
 				crono.start()
+				telegram_bot.send_alert("Breaking news ! Annullato il goal dei rossi")
+				telegram_bot.send_alert("Rossi %02d - Blue %02d" % (red_score,blue_score))
 			if last_score=="blue" and blue_score>0:
 				blue_score-=1
 				last_score="none"
 				crono.start()
+				telegram_bot.send_alert("Breaking news ! Annullato il goal dei blu")
+				telegram_bot.send_alert("Blu %02d - Rossi %02d" % (blue_score,red_score))
 
 		#Legge gli IR delle porte solo se nessuno ha ancora vinto
 		if scores_check(blue_score,red_score,crono)=="none":
@@ -94,6 +103,10 @@ def game():
 				blue_score=blue_score+1
 				last_score="blue"
 				print "Goal for blue %d" % blue_score
+				telegram_bot.send_alert("Goal dei blu\nBlu %02d - Rossi %02d" % (blue_score,red_score))
+				if scores_check(blue_score,red_score,crono)=="blue":
+					telegram_bot.send_alert("Vittoria dei Blu !!")
+					telegram_bot.send_alert("Durata della partita: ", crono.get())
 				blink(LED,2,0.2)
 				time.sleep(1)
 
@@ -102,6 +115,10 @@ def game():
 				red_score=red_score+1
 				last_score="red"
 				print "Goal for red %d" % red_score
+				telegram_bot.send_alert("Goal dei rossi\nRossi %02d - Blu %02d" % (red_score,blue_score))
+				if scores_check(blue_score,red_score,crono)=="red":
+					telegram_bot.send_alert("Vittoria dei Rossi !!")
+					telegram_bot.send_alert("Durata della partita: ", crono.get())
 				blink(LED,3,0.2)
 				time.sleep(1)
 

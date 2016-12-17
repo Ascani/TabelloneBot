@@ -24,7 +24,6 @@ blue_score=0
 red_score=0
 last_score="none"
 
-
 #Controllo di chi ha vinto
 def score_check(blue_score,red_score,crono):
 	if abs(blue_score-red_score)>=2 and blue_score>=10:
@@ -36,7 +35,8 @@ def score_check(blue_score,red_score,crono):
 		crono.stop()
 		return True
 	return False
-	
+
+#Gestione lampeggio led spia	
 def blink(gpio,times=1,delay=0.5):
 	for i in range(times):
 		gpio.on()
@@ -44,19 +44,21 @@ def blink(gpio,times=1,delay=0.5):
 		gpio.off()
 		time.sleep(delay)
 
+#Gestione del gioco. Questa funzione viene lanciata in
+#un thread separato ed esegue il loop di gestione del gioco
 def game():
 	global crono, blue_score, red_score, last_score
 
-	#Ingressi fotoaccoppiatori IR
+	#GPIO usati come ingressi dai fotoaccoppiatori IR
 	IR_RED=GPIO("J4.36","INPUT")
 	IR_BLUE=GPIO("J4.38","INPUT")
 	IR_PULL=GPIO("J4.40","INPUT")
 
-	#Led segnalatore on board
+	#Led spia interno
 	LED=GPIO("J4.24","LOW")
 
+	#Loop principale
 	while True:
-		
 		if IR_PULL.get_value()==1:
 			print "Pull"
 			blink(LED,1,0.2)
@@ -64,6 +66,7 @@ def game():
 			while IR_PULL.get_value()==1:
 				time.sleep(1)
 				counter+=1
+				#Se il tirante e' tenuto per piu' di 2 secondi resetta la partita
 				if counter>=2:
 					crono.reset()
 					crono.start()
@@ -73,7 +76,7 @@ def game():
 					print "Reset"
 					break
 					
-			#Annulla l'ultimo goal
+			#Se il tirante e' tenuto per meno di 2 secondi annulla l'ultimo goal
 			if last_score=="red" and red_score>0:
 				red_score-=1
 				last_score="none"
@@ -83,7 +86,9 @@ def game():
 				last_score="none"
 				crono.start()
 
+		#Legge gli IR delle porte solo se nessuno ha ancora vinto
 		if score_check(blue_score,red_score,crono)==False:
+
 			#Lettura IR porta dei rossi	
 			if IR_RED.get_value()==1:
 				blue_score=blue_score+1
@@ -100,6 +105,8 @@ def game():
 				blink(LED,3,0.2)
 				time.sleep(1)
 
+#Funzione chiamata quando via web arriva una richiesta http
+#http://biliardino.local/get_scores.json
 class get_scores(tornado.web.RequestHandler):
 	def get(self):
 		global crono,blue_score,red_score
@@ -107,14 +114,17 @@ class get_scores(tornado.web.RequestHandler):
 #		print "Remote IP: %s" % repr(self.request.remote_ip)
 		self.write('{"blue_score":"%02d","red_score":"%02d","time_lapse":"%s"}' % (blue_score,red_score,crono.get()))
 
+#Definizione delle funzioni di gestione delle richieste web
 application = tornado.web.Application([
 	(r"/get_scores.json", get_scores),
 	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "index.html"}),
 ])
 
 if __name__ == "__main__":
+	#Lancia un thread per la gestione della logica di gioco
 	thread.start_new_thread(game,())
 
+	#Entra in un loop infinito di gestione del web server
 	application.listen(80,"0.0.0.0")	
 	tornado.ioloop.IOLoop.instance().start()
 	

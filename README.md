@@ -13,6 +13,7 @@ Tabellone elettronico per biliardino
 * [biliardino.py](biliardino.py) Sorgente principale del programma che gira all'interno del biliardino
 * [acmepins.py](acmepins.py) Modulo di gestione dei pin di Arietta G25
 * [cronometro.py](cronometro.py) Modulo per la misurazione del tempo di gioco trascorso
+* [ledpanel.py](ledpanel.py) Modulo di gestione del pannello rgb
 
 ##Pacchetti da installare 
 

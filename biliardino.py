@@ -25,16 +25,16 @@ red_score=0
 last_score="none"
 
 #Controllo di chi ha vinto
-def score_check(blue_score,red_score,crono):
-	if abs(blue_score-red_score)>=2 and blue_score>=10:
+def scores_check(blue_score,red_score,crono):
+	if abs(blue_score-red_score)>=2 and blue_score>=10 and blue_score>red_score:
 		print "blue wins" 
 		crono.stop()
-		return True
-	if abs(blue_score-red_score)>=2 and red_score>=10:
+		return "blue"
+	if abs(blue_score-red_score)>=2 and red_score>=10 and red_score>blue_score:
 		print "red wins" 
 		crono.stop()
-		return True
-	return False
+		return "red"
+	return "none"
 
 #Gestione lampeggio led spia	
 def blink(gpio,times=1,delay=0.5):
@@ -87,7 +87,7 @@ def game():
 				crono.start()
 
 		#Legge gli IR delle porte solo se nessuno ha ancora vinto
-		if score_check(blue_score,red_score,crono)==False:
+		if scores_check(blue_score,red_score,crono)=="none":
 
 			#Lettura IR porta dei rossi	
 			if IR_RED.get_value()==1:
@@ -112,7 +112,9 @@ class get_scores(tornado.web.RequestHandler):
 		global crono,blue_score,red_score
 		
 #		print "Remote IP: %s" % repr(self.request.remote_ip)
-		self.write('{"blue_score":"%02d","red_score":"%02d","time_lapse":"%s"}' % (blue_score,red_score,crono.get()))
+		the_winner_is=scores_check(blue_score,red_score,crono)
+		self.write('{"datatype":"scores","blue_score":"%02d","red_score":"%02d","time_lapse":"%s","the_winner_is":"%s"}' % (blue_score,red_score,crono.get(),the_winner_is))
+				
 
 #Definizione delle funzioni di gestione delle richieste web
 application = tornado.web.Application([

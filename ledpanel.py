@@ -115,6 +115,8 @@ class LedPanel():
 	def nolink(self):
 		draw = ImageDraw.Draw(self.im)
 		draw.fontmode="1" #No antialias
+		#Disegna prima un rettangolo nero per coprire scritte precedenti
+		draw.rectangle((0,0,31,31), outline=0, fill=0)
 		draw.text((0,0), "No", (5,0,0), font=self.small_font)
 		draw.text((0,10), "Link", (5,0,0), font=self.small_font)
 		del draw		
